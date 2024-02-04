@@ -3,7 +3,7 @@ const taskInput = document.getElementById("task-input");
 const dateInput = document.getElementById("date-input");
 const alertMessage = document.getElementById("alert-message");
 
-const todos = [];
+const todos = JSON.parse(localStorage.getItem("todos")) || [];
 
 // create id for every todo
 const generateId = () => {
@@ -26,6 +26,11 @@ const showAlert = (message, type) => {
   }, 2345);
 };
 
+// save todo local storage
+const saveToLocalStorage = () => {
+  localStorage.setItem("todos", JSON.stringify(todos));
+};
+
 // getting todo values
 const addHandler = () => {
   const task = taskInput.value;
@@ -38,6 +43,7 @@ const addHandler = () => {
   };
   if (task) {
     todos.push(todo);
+    saveToLocalStorage();
     taskInput.value = "";
     dateInput.value = "";
     console.log(todos);
