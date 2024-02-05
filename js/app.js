@@ -3,8 +3,9 @@ const taskInput = document.getElementById("task-input");
 const dateInput = document.getElementById("date-input");
 const alertMessage = document.getElementById("alert-message");
 const todosBody = document.querySelector("tbody");
+const deleteAllButton = document.getElementById("delete-all-button");
 
-const todos = JSON.parse(localStorage.getItem("todos")) || [];
+let todos = JSON.parse(localStorage.getItem("todos")) || [];
 
 // save todo local storage
 const saveToLocalStorage = () => {
@@ -49,7 +50,7 @@ const displayTodos = () => {
            <td>
                <button>Edit</button>
                <button>Do</button>
-               <button>Delete</button>
+               <button onclick="deleteHandler('${todo.id}')">Delete</button>
            </td>
         </tr>
     `;
@@ -78,4 +79,25 @@ const addHandler = () => {
   }
 };
 
+const deleteAllHandler = () => {
+  if (todos.length) {
+    todos = [];
+    saveToLocalStorage();
+    displayTodos();
+    showAlert("All tasks cleared successfully", "success");
+  } else {
+    showAlert("No task to clear", "error");
+  }
+};
+
+const deleteHandler = (id) => {
+  const newTodos = todos.filter((todo) => todo.id !== id);
+  todos = newTodos;
+  saveToLocalStorage();
+  displayTodos();
+  showAlert("Todo deleted successfully", "success");
+};
+
+window.addEventListener("load", displayTodos);
 addButton.addEventListener("click", addHandler);
+deleteAllButton.addEventListener("click", deleteAllHandler);
