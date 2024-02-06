@@ -143,3 +143,7 @@ background-color: var(--color-error);
 .alert-error {
     background-color: var(--color-error);
 }
+
+#edit-button {
+    display: none;
+}
