@@ -103,6 +103,7 @@ tbody td {
     background-color: var(--color-task);
     padding: 5px 10px;
     text-align: center;
+    width: 25%;
 }
 
 tbody td button {
@@ -116,6 +117,7 @@ background-color: var(--color-warning);
 
 tbody td button:nth-child(2){
 background-color: var(--color-success);
+width: 48px;
 }
 
 tbody td button:nth-child(3){
